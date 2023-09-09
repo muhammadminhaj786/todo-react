@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './App.css'
 import Button from './assets/components/Button'
+import brightLogo from './assets/blgo.png'
+import Navbar from './assets/components/Navbar'
 
 const App = () => {
   let [Value,setValue] = useState('')
@@ -9,29 +11,33 @@ const App = () => {
   function taskAdd(){
     console.log(Value)
     !Value ? alert('Enter a value') : Items.push(Value) 
-
+    setValue('')
     setItems([...Items])
   }  
-  function deleteTodos(){
-    setItems([])
+  function deleteTodos(index){
+    console.log(index)
+  }
+  function EditTodo(){
+    
+  }
+  function light(){
+    console.log('light')
   }
   return (
     <div>
-      <div className="first">
-      <h1 className='bg-slate-500 h-12 text-center font-bold text-[28px]'>
-        Todo App
-      </h1>
-      </div>
+      <Navbar logoSrc ={brightLogo} onClick={light}/>
       <div className="second">
         <div className='flex align-middle border  w-[70%] mx-[auto] mt-8'>
-          <input type="text" onChange={(e)=>{
+          <input type="text" value={Value}  onChange={(e)=>{
             // console.log(e.target.value)
             setValue(e.target.value)
+            // settodoValue(e.target.value)
+            
           }} className='border-green-950 w-full h-[50px]' placeholder='Enter Your Task'  />
         </div>
         <div className='flex mx-[auto] w-[25%] mt-5 justify-evenly'>
           <Button val='Add Task' onClick={taskAdd} />
-          <Button val ='Delete All'onClick={deleteTodos} />
+          <Button val ='Delete All'onClick={()=> deleteTodos(index) } />
         </div>
       </div>
       <div className="third w-[70%] mx-auto mt-5">
@@ -42,8 +48,10 @@ const App = () => {
                 <li key={index} className='border font-bold text-lg flex justify-between mt-4' >
                  {value}
                 <div>
-                  <Button val = 'Edit'/>
-                  <Button val ='Delete'/>
+                  <Button val = 'Edit' onClick={EditTodo}/>
+                  <Button val ='Delete' onClick={(e)=>{
+                    console.log(index)
+                  }}/>
                 </div>
                 </li>
               )
