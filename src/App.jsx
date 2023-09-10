@@ -10,9 +10,18 @@ const App = () => {
   
   function taskAdd(){
     console.log(Value)
+    // const todoObj = {
+    //   Value,
+    //   // id,
+    //   isEdit:false
+
+    // }
+    // console.log('todo Object',todoObj)
     !Value ? alert('Enter a value') : Items.push(Value) 
-    setValue('')
+    // Items.push(Value)
     setItems([...Items])
+    setValue('')
+    // setItems([...Items])
   } 
   function deleteAll(){
     setItems([])
@@ -21,8 +30,12 @@ const App = () => {
     Items.splice(index,1)
     setItems([...Items])
   }
-  function EditTodo(){
-    
+  function EditTodo(index){
+    console.log('edit')
+    var editValue = prompt('Enter a task',Items[index])
+    Items[index]=editValue
+    setItems([...Items])
+
   }
   function light(){
     console.log('light')
@@ -52,7 +65,7 @@ const App = () => {
                 <li key={index} className='border font-bold text-lg flex justify-between mt-4' >
                  {value}
                 <div>
-                  <Button val = 'Edit' onClick={EditTodo}/>
+                  <Button val = 'Edit' onClick={()=>EditTodo(index)}/>
                   <Button val ='Delete' onClick={()=> deleteTodos(index)}/>
                 </div>
                 </li>
