@@ -13,9 +13,13 @@ const App = () => {
     !Value ? alert('Enter a value') : Items.push(Value) 
     setValue('')
     setItems([...Items])
-  }  
+  } 
+  function deleteAll(){
+    setItems([])
+  } 
   function deleteTodos(index){
-    console.log(index)
+    Items.splice(index,1)
+    setItems([...Items])
   }
   function EditTodo(){
     
@@ -37,7 +41,7 @@ const App = () => {
         </div>
         <div className='flex mx-[auto] w-[25%] mt-5 justify-evenly'>
           <Button val='Add Task' onClick={taskAdd} />
-          <Button val ='Delete All'onClick={()=> deleteTodos(index) } />
+          <Button val ='Delete All'onClick={ deleteAll} />
         </div>
       </div>
       <div className="third w-[70%] mx-auto mt-5">
@@ -49,9 +53,7 @@ const App = () => {
                  {value}
                 <div>
                   <Button val = 'Edit' onClick={EditTodo}/>
-                  <Button val ='Delete' onClick={(e)=>{
-                    console.log(index)
-                  }}/>
+                  <Button val ='Delete' onClick={()=> deleteTodos(index)}/>
                 </div>
                 </li>
               )
